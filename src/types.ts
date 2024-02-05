@@ -161,3 +161,10 @@ type cardDate = {
 type cardDetails = cardNumber & cardDate & {
     cvv: number
 }
+
+// TUPLE
+
+let userNew: [string, number, boolean];
+
+userNew = ["Petko", 5, true];
+// sus tuple mojem da podredim tipovete.
