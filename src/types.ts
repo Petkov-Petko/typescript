@@ -148,3 +148,16 @@ interface Ipost {
     extra: IAuthor[] | ICategory[];
 }
 
+// OBJECTS combining
+
+type cardNumber = {
+    cardNumber: string
+}
+
+type cardDate = {
+    cardDate: string
+}
+
+type cardDetails = cardNumber & cardDate & {
+    cvv: number
+}
