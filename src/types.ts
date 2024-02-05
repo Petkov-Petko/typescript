@@ -168,3 +168,15 @@ let userNew: [string, number, boolean];
 
 userNew = ["Petko", 5, true];
 // sus tuple mojem da podredim tipovete.
+
+
+// ENUM
+
+enum SeatChoice {
+    DOOR = 5,
+    MIDDLE = 15,
+    WINDOW = 33,
+}
+
+const mySeat = SeatChoice.WINDOW
+
