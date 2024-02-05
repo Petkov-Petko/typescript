@@ -180,3 +180,45 @@ enum SeatChoice {
 
 const mySeat = SeatChoice.WINDOW
 
+// UNTERFACES  
+// KAto types no moejem da dobavqme funkcii
+
+interface User {
+    readonly Id: number,
+    email: string
+    userId: number
+    startTrial: (name: string) => string
+}
+
+// Можем да добаваме още параметри без да бутаме главния User.
+interface User {
+    githubId: string
+}
+
+//Копираме User и со добавяме каквто искаме
+interface Admin extends User {
+    isAdmin: boolean
+}
+
+
+
+const petko: User = {
+    Id: 22,
+    email: "Petrko.com",
+    userId: 335,
+    startTrial: (name = "petko") => {
+        return "Okey"
+    },
+    githubId: "petkov"
+}
+
+const me: Admin = {
+    Id: 22,
+    email: "Petrko.com",
+    userId: 335,
+    startTrial: (name = "petko") => {
+        return "Okey"
+    },
+    githubId: "petkov",
+    isAdmin: false
+}
