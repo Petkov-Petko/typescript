@@ -222,3 +222,16 @@ const me: Admin = {
     githubId: "petkov",
     isAdmin: false
 }
+
+
+// Pick and Omit (Копират пропертита на обект. Със Pick избираме кой пропертита да бъдат в новия обект а със Omit кой да ги няма)
+
+interface User {
+    id: string;
+    firstName: string;
+    lastName:string;
+}
+
+type names = Pick<User, "firstName" | "lastName">; // {firstName: string, lastName: string};
+
+type idOnly = Omit<User, "firstName" | "lastName"> // {id:string};
