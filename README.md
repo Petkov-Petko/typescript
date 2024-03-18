@@ -1,6 +1,7 @@
 
 #                        **TypeScript**
 
+
 ## ⚫How to Set Up the ts config File:
 First, create the ts config file:   
 ```
