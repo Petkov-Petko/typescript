@@ -113,3 +113,89 @@ let person2: Person = {
   isProgrammer: false,
 };
 ```
+
+Можем също да декларираме функции в обекта ни:
+```
+interface Speech {
+  sayHi(name: string): string;
+  sayBye: (name: string) => string;
+}
+
+let sayStuff: Speech = {
+  sayHi: function (name: string) {
+    return `Hi ${name}`;
+  },
+  sayBye: (name: string) => `Bye ${name}`,
+};
+
+console.log(sayStuff.sayHi('Heisenberg')); // Hi Heisenberg
+console.log(sayStuff.sayBye('Heisenberg')); // Bye Heisenberg
+```
+**🟣functions:**    
+Можем да определим какви типове трябва да бъдат аргументите на функцията, както и вида на връщането на функцията:   
+```
+function circle(diam: number): string {
+  return `The circumference is  + ${Math.PI * diam}`;
+}
+
+console.log(circle(10)); // The circumference is 31.41592653589793
+```
+
+⚪Можем да добавим въпросителен знак след параметър, за да го направим незадължителен. 
+```
+const add = (a: number, b: number, c?: number | string) => {
+  console.log(c);
+  return a + b;
+};
+```
+Ако искаме да декларираме функционална променлива, но не и да я дефинираме, тогава използвайте function signature:
+```
+// Declare
+let sayHello: (name: string) => void;
+
+// Define the function, satisfying its signature
+sayHello = (name) => {
+  console.log('Hello ' + name);
+};
+
+sayHello('Danny'); // Hello Danny
+```
+**🟣type aliases:**     
+Псевдонимите на типове могат да намалят дублирането на кодове, като поддържат нашия код DRY.
+```
+type StringOrNumber = string | number
+let x: StringOrNumber
+
+type PersonObject = {
+  name: string;
+  id: StringOrNumber;
+};
+
+const person1: PersonObject = {
+  name: 'John',
+  id: 1,
+};
+
+const sayHello = (person: PersonObject) => {
+  return 'Hi ' + person.name;
+};
+```
+
+# **✅DOM**
+TypeScript няма достъп до DOM като JavaScript. Това означава, че всеки път, когато се опитаме да получим достъп до DOM елементи, TypeScript никога не е сигурен, че те действително съществуват. 
+
+Примерът по-долу показва проблема:
+```
+const link = document.querySelector('a');
+
+console.log(link.href); // ERROR: Object is possibly 'null'. TypeScript can't be sure the anchor tag exists, as it can't access the DOM
+```
+
+**🟣non-null assertion operator (ненулевия оператор) (!)**   
+С ненулевия оператор за твърдение (!) можем да кажем изрично на компилатора, че даден израз има стойност, различна от nullили undefined. 
+```
+// Here we are telling TypeScript that we are certain that this anchor tag exists
+const link = document.querySelector('a')!;
+
+console.log(link.href); // www.freeCodeCamp.org
+```
