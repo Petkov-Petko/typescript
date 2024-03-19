@@ -231,3 +231,84 @@ const link = document.querySelector('a')!;
 
 console.log(link.href); // www.freeCodeCamp.org
 ```
+
+# **✅Classes**
+Можем да дефинираме типовете, които всяка част от данните трябва да бъде в клас:
+
+```
+class Person {
+  name: string;
+  isCool: boolean;
+  pets: number;
+
+  constructor(n: string, c: boolean, p: number) {
+    this.name = n;
+    this.isCool = c;
+    this.pets = p;
+  }
+}
+
+const person1 = new Person('Danny', false, 1);
+const person2 = new Person('Sarah', 'yes', 6); // ERROR: Argument of type 'string' is not assignable to parameter of type 'boolean'.
+```
+
+След това можем да създадем peopleмасив, който включва само обекти, конструирани от Personкласа:
+```
+let People: Person[] = [person1, person2];
+```
+
+**🟣readonly, private, protected и public**  
+
+⚪ readonly:  
+Член на клас, който може да бъде четен, но не може да бъде променян след инициализацията му.
+
+⚪ privite:  
+Ограничава достъпа до членовете само в рамките на тялото на класа, в който са декларирани.
+
+⚪ protected:  
+Позволява достъпа до членовете само от тялото на класа и от наследените класове. Те не са достъпни извън наследниците на класа.
+
+*Примери:*
+```
+class Person {
+  readonly name: string; // This property is immutable - it can only be read
+  private isCool: boolean; // Can only access or modify from methods within this class
+  protected email: string; // Can access or modify from this class and subclasses
+  public pets: number; // Can access or modify from anywhere - including outside the class
+
+  constructor(n: string, c: boolean, e: string, p: number) {
+    this.name = n;
+    this.isCool = c;
+    this.email = e;
+    this.pets = p;
+  }
+
+  sayMyName() {
+    console.log(`Your not Heisenberg, you're ${this.name}`);
+  }
+}
+
+const person1 = new Person('Danny', false, 'dan@e.com', 1);
+console.log(person1.name); // Fine
+person1.name = 'James'; // Error: read only
+console.log(person1.isCool); // Error: private property - only accessible within Person class
+console.log(person1.email); // Error: protected property - only accessible within Person class and its subclasses
+console.log(person1.pets); // Public property - so no problem
+person1.sayMyName() //Your not Heisenberg, you're Danny
+```
+
+Можем да направим нашия код по-сбит, като конструираме свойства на класа по следния начин:
+```
+class Person {
+  constructor(
+    readonly name: string,
+    private isCool: boolean,
+    protected email: string,
+    public pets: number
+  ) {}
+
+  sayMyName() {
+    console.log(`Your not Heisenberg, you're ${this.name}`);
+  }
+}
+```
