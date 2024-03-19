@@ -94,6 +94,8 @@ person = {
 **🟣Interface:**    
 Когато дефинираме обект, обикновено ще използваме интерфейс. Това е полезно, ако трябва да проверим дали множество обекти имат едни и същи специфични свойства и типове стойности:
 
+
+
 ```
 interface Person {
   name: string;
@@ -107,11 +109,15 @@ let person1: Person = {
   isProgrammer: true,
 };
 
-let person2: Person = {
-  name: 'Sarah',
-  location: 'Germany',
-  isProgrammer: false,
-};
+function sayHi(person: Person) {
+  console.log(`Hi ${person.name}`);
+}
+
+sayHi({
+  name: 'John',
+  location: 'Varna',
+  isProgrammer: true
+}); // Hi John
 ```
 
 Можем също да декларираме функции в обекта ни:
@@ -131,6 +137,25 @@ let sayStuff: Speech = {
 console.log(sayStuff.sayHi('Heisenberg')); // Hi Heisenberg
 console.log(sayStuff.sayBye('Heisenberg')); // Bye Heisenberg
 ```
+
+**interface vs type**   
+interface може да се променя в последствие както и да се екстендва(наследява) докато type си остава фиксирано.
+
+```
+interface Animal {
+    name: string;
+}
+
+interface Bear extends Animal {
+    honey: boolean
+}
+
+const bear: Bear = {
+    name: 'Winnie',
+    honey: true
+}
+```
+
 **🟣functions:**    
 Можем да определим какви типове трябва да бъдат аргументите на функцията, както и вида на връщането на функцията:   
 ```
@@ -179,6 +204,13 @@ const person1: PersonObject = {
 const sayHello = (person: PersonObject) => {
   return 'Hi ' + person.name;
 };
+```
+**🟣Literal types:**  
+```
+let favouriteColor: 'red' | 'blue' | 'green' | 'yellow';
+
+favouriteColor = 'blue';
+favouriteColor = 'crimson'; // ERROR:
 ```
 
 # **✅DOM**
